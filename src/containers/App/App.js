@@ -12,6 +12,8 @@ import { InfoBar } from 'components';
 import { routeActions } from 'react-router-redux';
 import config from '../../config';
 import { asyncConnect } from 'redux-async-connect';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import MyRawTheme from 'theme/material-ui.config';
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -41,6 +43,22 @@ export default class App extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object
+  };
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getMuiTheme(
+        MyRawTheme, {
+          avatar: {
+            borderColor: null,
+          },
+          userAgent: 'all',
+        }),
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
@@ -89,6 +107,9 @@ export default class App extends Component {
               </LinkContainer>
               <LinkContainer to="/about">
                 <NavItem eventKey={4}>About Us</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/hello">
+                <NavItem eventKey={99}>Hello</NavItem>
               </LinkContainer>
 
               {!user &&

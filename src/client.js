@@ -11,6 +11,7 @@ import {Provider} from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-async-connect';
 import useScroll from 'scroll-behavior/lib/useStandardScroll';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import getRoutes from './routes';
 
@@ -33,6 +34,8 @@ function initSocket() {
 }
 
 global.socket = initSocket();
+
+injectTapEventPlugin();
 
 const component = (
   <Router render={(props) =>

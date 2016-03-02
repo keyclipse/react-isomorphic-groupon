@@ -18,6 +18,12 @@
   }
 }
 .appContent {
-  margin: 0px 0; // for fixed navbar
   padding-top: 64px;
+}
+
+.col-fixed-300{
+  width:300px;
+  background:red;
+  position:fixed;
+  height:100%;
 }

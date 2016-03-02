@@ -50,6 +50,9 @@ export default class App extends Component {
   constructor() {
     super();
     this.handleLeftNavRouter = this.handleLeftNavRouter.bind(this);
+    this.handleToggleLeftNav = this.handleToggleLeftNav.bind(this);
+    this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
+    this.state = {sidebarOpen: false, sidebarDocked: false};
   }
 
   getChildContext() {
@@ -64,6 +67,15 @@ export default class App extends Component {
     };
   }
 
+  componentWillMount() {
+  }
+
+  componentDidMount() {
+    const mql = window.matchMedia('(min-width: 800px)');
+    mql.addListener(this.mediaQueryChanged);
+    this.setState({mql: mql, sidebarDocked: mql.matches, sidebarOpen: mql.matches});
+  }
+
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
@@ -74,9 +86,26 @@ export default class App extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.state.mql.removeListener(this.mediaQueryChanged);
+  }
+
+  mediaQueryChanged(mediaQueryList) {
+    console.log('Media query changed');
+    this.setState({sidebarDocked: mediaQueryList.matches, sidebarOpen: mediaQueryList.matches});
+  }
+
   handleLeftNavRouter(route) {
     // Do DOM Diff refresh
     this.props.pushState(route);
+  }
+
+  handleToggleLeftNav() {
+    this.setState({sidebarOpen: !this.state.sidebarOpen});
+  }
+
+  handleDockedLeftNav() {
+    this.setState({sidebarDocked: !this.state.sidebarDocked});
   }
 
   handleLogout = (event) => {
@@ -88,14 +117,36 @@ export default class App extends Component {
     // const {user} = this.props;
     const styles = require('./App.scss');
 
+    const stylesContent = () => {
+      let objStyle = {};
+      console.log('style content rendered');
+      if (this.state.sidebarDocked) {
+        objStyle = Object.assign({}, {
+          paddingLeft: '300px'
+        });
+      } else {
+        objStyle = {};
+      }
+
+      console.log(objStyle);
+
+      return objStyle;
+    };
+
     return (
       <div className={styles.app}>
         <Helmet {...config.app.head}/>
 
         <LeftNav
           ref="leftNav"
-          docked
-          open={false}>
+          open={this.state.sidebarOpen}
+          docked={this.state.sidebarDocked}
+          width={300}
+          style={{
+            zIndex: 1000
+          }}
+        >
+          <AppBar title="AppBar"/>
           <MenuItem
             linkButton
             containerElement={<Link to="/" />}
@@ -106,16 +157,27 @@ export default class App extends Component {
             containerElement={<Link to="/widgets" />}
             primaryText="Widgets"
           />
+          <MenuItem
+            linkButton
+            containerElement={<Link to="/about" />}
+            primaryText="About"
+          />
 
         </LeftNav>
 
         <AppBar
           title="Title"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
-          style={{position: 'fixed'}}
+          onLeftIconButtonTouchTap={this.handleToggleLeftNav}
+          style={{
+            position: 'fixed',
+            zIndex: 1001
+          }}
         />
 
-        <div className={styles.appContent}>
+        <div className={styles.appContent + " col-md-12"}
+             style={stylesContent()}
+        >
           {this.props.children}
         </div>
         <InfoBar/>

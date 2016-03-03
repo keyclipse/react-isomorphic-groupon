@@ -52,7 +52,7 @@ export default (store) => {
       <Route path="login" component={Login}/>
       <Route path="survey" component={Survey}/>
       <Route path="widgets" component={Widgets}/>
-
+      <Route path="home" component={Home}/>
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />
     </Route>

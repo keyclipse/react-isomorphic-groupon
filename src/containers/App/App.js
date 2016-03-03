@@ -117,15 +117,33 @@ export default class App extends Component {
     // const {user} = this.props;
     const styles = require('./App.scss');
 
-    const stylesContent = () => {
+    const stylesContent = (extendObj = {}) => {
       let objStyle = {};
       console.log('style content rendered');
       if (this.state.sidebarDocked) {
-        objStyle = Object.assign({}, {
+        objStyle = Object.assign(extendObj, {
           paddingLeft: '300px'
         });
       } else {
-        objStyle = {};
+        objStyle = extendObj;
+      }
+
+      console.log(objStyle);
+
+      return objStyle;
+    };
+
+    const stylesAppBarContent = (extendObj = {}) => {
+      let objStyle = {};
+      console.log('style content rendered');
+      if (this.state.sidebarDocked) {
+        objStyle = Object.assign(extendObj, {
+          marginLeft: '-300px'
+        });
+      } else {
+        objStyle = Object.assign(extendObj, {
+          marginLeft: '0px'
+        });
       }
 
       console.log(objStyle);
@@ -134,7 +152,9 @@ export default class App extends Component {
     };
 
     return (
-      <div className={styles.app}>
+      <div className={styles.app}
+           style={stylesContent()}
+           >
         <Helmet {...config.app.head}/>
 
         <LeftNav
@@ -144,6 +164,9 @@ export default class App extends Component {
           width={300}
           style={{
             zIndex: 1000
+          }}
+          overlayStyle={{
+            zIndex: 999
           }}
         >
           <AppBar title="AppBar"/>
@@ -162,6 +185,11 @@ export default class App extends Component {
             containerElement={<Link to="/about" />}
             primaryText="About"
           />
+          <MenuItem
+            linkButton
+            containerElement={<Link to="/login" />}
+            primaryText="Login"
+          />
 
         </LeftNav>
 
@@ -169,16 +197,17 @@ export default class App extends Component {
           title="Title"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
           onLeftIconButtonTouchTap={this.handleToggleLeftNav}
-          style={{
+          style={stylesAppBarContent({
             position: 'fixed',
+            marginLeft: '-300px',
             zIndex: 1001
-          }}
+          })}
         />
 
-        <div className={styles.appContent + " col-md-12"}
-             style={stylesContent()}
-        >
-          {this.props.children}
+        <div className={styles.appContent}>
+          <div className={styles.pageContentWrapper}>
+            {this.props.children}
+          </div>
         </div>
         <InfoBar/>
 

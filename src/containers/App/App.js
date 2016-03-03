@@ -122,7 +122,7 @@ export default class App extends Component {
       console.log('style content rendered');
       if (this.state.sidebarDocked) {
         objStyle = Object.assign(extendObj, {
-          paddingLeft: '300px'
+          marginLeft: '300px'
         });
       } else {
         objStyle = extendObj;
@@ -133,27 +133,8 @@ export default class App extends Component {
       return objStyle;
     };
 
-    const stylesAppBarContent = (extendObj = {}) => {
-      let objStyle = {};
-      console.log('style content rendered');
-      if (this.state.sidebarDocked) {
-        objStyle = Object.assign(extendObj, {
-          marginLeft: '-300px'
-        });
-      } else {
-        objStyle = Object.assign(extendObj, {
-          marginLeft: '0px'
-        });
-      }
-
-      console.log(objStyle);
-
-      return objStyle;
-    };
-
     return (
       <div className={styles.app}
-           style={stylesContent()}
            >
         <Helmet {...config.app.head}/>
 
@@ -197,25 +178,23 @@ export default class App extends Component {
           title="Title"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
           onLeftIconButtonTouchTap={this.handleToggleLeftNav}
-          style={stylesAppBarContent({
+          style={{
             position: 'fixed',
-            marginLeft: '-300px',
             zIndex: 1001
-          })}
+          }}
         />
 
-        <div className={styles.appContent}>
+        <div className={styles.appContent + ' container-fluid'} style={stylesContent()}>
           <div className={styles.pageContentWrapper}>
             {this.props.children}
           </div>
-        </div>
-        <InfoBar/>
-
-        <div className="well text-center">
-          Have questions? Ask for help <a
-          href="https://github.com/erikras/react-redux-universal-hot-example/issues"
-          target="_blank">on Github</a> or in the <a
-          href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a> Discord channel.
+          <InfoBar/>
+          <div className="well text-center">
+            Have questions? Ask for help <a
+            href="https://github.com/erikras/react-redux-universal-hot-example/issues"
+            target="_blank">on Github</a> or in the <a
+            href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a> Discord channel.
+          </div>
         </div>
       </div>
     );

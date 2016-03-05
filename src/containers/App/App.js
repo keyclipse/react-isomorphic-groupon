@@ -12,7 +12,13 @@ import MyRawTheme from 'theme/material-ui.config';
 import AppBar from 'material-ui/lib/app-bar';
 import LeftNav from 'material-ui/lib/left-nav';
 import MenuItem from 'material-ui/lib/menus/menu-item';
-import { Link } from 'react-router';
+
+const menuItems = [
+  { text: 'Home', link: '/'},
+  { text: 'Widgets', link: '/widgets'},
+  { text: 'About', link: '/about'},
+  { text: 'Stargazers', link: '/stargazers'}
+];
 
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
@@ -108,6 +114,13 @@ export default class App extends Component {
     this.setState({sidebarDocked: !this.state.sidebarDocked});
   }
 
+  handleTapMenuItem(link) {
+    if (!this.state.sidebarDocked) {
+      this.setState({sidebarOpen: false});
+    }
+    this.props.pushState(link);
+  }
+
   handleLogout = (event) => {
     event.preventDefault();
     this.props.logout();
@@ -151,27 +164,11 @@ export default class App extends Component {
           }}
         >
           <AppBar title="AppBar"/>
-          <MenuItem
-            linkButton
-            containerElement={<Link to="/" />}
-            primaryText="Home"
-          />
-          <MenuItem
-            linkButton
-            containerElement={<Link to="/widgets" />}
-            primaryText="Widgets"
-          />
-          <MenuItem
-            linkButton
-            containerElement={<Link to="/about" />}
-            primaryText="About"
-          />
-          <MenuItem
-            linkButton
-            containerElement={<Link to="/login" />}
-            primaryText="Login"
-          />
-
+          {menuItems.map((item) =>
+            <MenuItem
+              onTouchTap={this.handleTapMenuItem.bind(this, item.link)}
+              primaryText={item.text}
+            />)}
         </LeftNav>
 
         <AppBar

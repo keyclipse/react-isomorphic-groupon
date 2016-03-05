@@ -7,4 +7,5 @@ export Login from './Login/Login';
 export LoginSuccess from './LoginSuccess/LoginSuccess';
 export Survey from './Survey/Survey';
 export Hello from './Hello/Hello';
+export Stargazers from './Stargazers/Stargazers';
 export NotFound from './NotFound/NotFound';

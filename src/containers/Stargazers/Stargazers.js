@@ -1,27 +1,17 @@
 import React, {Component} from 'react';
 import AppBar from 'material-ui/lib/app-bar';
+import { load as loadStargazerUser } from 'redux/modules/stargazers';
 
-export default class Stargazers extends Component {
-
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      open: true
-    };
-    this.handleRequestClose = this.handleRequestClose.bind(this);
-    this.handleTouchTap = this.handleTouchTap.bind(this);
+@asyncConnect([{
+  promise: ({store: {dispatch, getState}}) => {
+    return dispatch(loadStargazerUser());
   }
-
-  handleRequestClose() {
-    this.setState({
-      open: false,
-    });
-  }
-
-  handleTouchTap() {
-    this.setState({
-      open: true,
-    });
+}])
+@connect(
+  state => ({stargazers: state.stargazers.data}))
+export default class InfoBar extends Component {
+  static propTypes = {
+    stargazers: PropTypes.object
   }
 
   render() {

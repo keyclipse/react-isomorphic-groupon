@@ -1,37 +1,5 @@
 import React, {Component} from 'react';
 import AppBar from 'material-ui/lib/app-bar';
-/*
-import RaisedButton from 'material-ui/lib/raised-button';
-import Dialog from 'material-ui/lib/dialog';
-import FlatButton from 'material-ui/lib/flat-button';
-*/
-/*
-import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
-import {deepOrange500} from 'material-ui/lib/styles/colors';
-*/
-
-/*
-const styles = {
-  container: {
-    textAlign: 'center',
-    paddingTop: 200,
-  },
-};
-*/
-
-/*
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: deepOrange500,
-  },
-}, {
-  avatar: {
-    borderColor: null,
-  },
-  userAgent: 'all',
-});
-*/
 
 export default class Hello extends Component {
 
@@ -57,17 +25,6 @@ export default class Hello extends Component {
   }
 
   render() {
-    /*
-    const standardActions = (
-      <FlatButton
-        label="Okey"
-        secondary
-        onTouchTap={this.handleRequestClose}
-      />
-    );
-    */
-
-
     return (
       <div>
         <AppBar

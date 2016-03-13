@@ -3,6 +3,7 @@ const LOAD_SUCCESS = 'stargazers/LOAD_SUCCESS';
 const LOAD_FAIL = 'stargazers/LOAD_FAIL';
 
 const initialState = {
+  loading: false,
   loaded: false
 };
 

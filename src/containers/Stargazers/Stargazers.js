@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import AppBar from 'material-ui/lib/app-bar';
-import { load as loadStargazerUser } from 'redux/modules/stargazers';
-import { asyncConnect } from 'redux-async-connect';
-import { connect } from 'react-redux';
+import TextField from 'material-ui/lib/text-field';
+// import { load as loadStargazerUser } from 'redux/modules/stargazers';
 
+/*
 @asyncConnect([{
   promise: ({store: {dispatch}}) => {
     return dispatch(loadStargazerUser('keyclipse'));
@@ -12,17 +11,40 @@ import { connect } from 'react-redux';
 @connect(
   state => ({stargazers: state.stargazers.data})
 )
+*/
+
+
 export default class InfoBar extends Component {
   static propTypes = {
     stargazers: PropTypes.object
   }
 
+  state = {
+    stargazersInput: ''
+  }
+
+  handleChangeInputStargazers = (event) => {
+    this.setState({
+      stargazersInput: event.target.value
+    });
+  }
+
+  handleOnEnterInputStargzers = (event) => {
+    this.setState({
+      stargazersInput: ''
+    });
+    console.log(`entered ${event.target.value}`);
+  }
+
   render() {
     return (
       <div>
-        <AppBar
-          title="Title"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
+        <TextField
+          hintText="Hint Text"
+          floatingLabelText="Floating Label Text"
+          value={this.state.stargazersInput}
+          onChange={this.handleChangeInputStargazers}
+          onEnterKeyDown={this.handleOnEnterInputStargzers}
         />
       </div>
     );

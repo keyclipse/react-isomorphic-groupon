@@ -53,7 +53,9 @@ export default (store) => {
       <Route path="login" component={Login}/>
       <Route path="survey" component={Survey}/>
       <Route path="widgets" component={Widgets}/>
-      <Route path="stargazers" component={Stargazers}/>
+      <Route path="stargazers" component={Stargazers}>
+        <Route path=':username' component={GithubUser} />
+      </Route>
       <Route path="home" component={Home}/>
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404} />

@@ -14,6 +14,9 @@ import {
     NotFound,
     Stargazers
   } from 'containers';
+import {
+    GithubUser
+  } from 'components';
 
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {
@@ -54,7 +57,7 @@ export default (store) => {
       <Route path="survey" component={Survey}/>
       <Route path="widgets" component={Widgets}/>
       <Route path="stargazers" component={Stargazers}>
-        <Route path=':username' component={GithubUser} />
+        <Route path=":username" component={GithubUser} />
       </Route>
       <Route path="home" component={Home}/>
       { /* Catch all route */ }

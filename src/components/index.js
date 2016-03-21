@@ -12,3 +12,4 @@ export MiniInfoBar from './MiniInfoBar/MiniInfoBar';
 export SurveyForm from './SurveyForm/SurveyForm';
 export WidgetForm from './WidgetForm/WidgetForm';
 export GithubExplorer from './GithubExplorer/GithubExplorer';
+export GithubUser from './GithubUser/GithubUser';

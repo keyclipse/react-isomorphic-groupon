@@ -33,6 +33,10 @@ export default function stargazers(state = initialState, action = {}) {
   }
 }
 
+export function isLoaded(globalState) {
+  return globalState.stargazers && globalState.stargazers.loaded;
+}
+
 export function load(username) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],

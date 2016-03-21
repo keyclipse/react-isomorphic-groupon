@@ -4,15 +4,14 @@ import TextField from 'material-ui/lib/text-field';
 
 export default class GithubExplorer extends Component {
   static propTypes = {
-    params: PropTypes.shape({
-      username: PropTypes.string
-    })
+    onSubmitClicked: PropTypes.func.isRequired,
+    username: PropTypes.string
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      explorerInput: props.params.username
+      explorerInput: props.username
     };
   }
 
@@ -23,10 +22,7 @@ export default class GithubExplorer extends Component {
   }
 
   handleOnEnterInput = (event) => {
-    this.setState({
-      explorerInput: ''
-    });
-    console.log(`entered ${event.target.value}`);
+    this.props.onSubmitClicked(event.target.value);
   }
 
   render() {

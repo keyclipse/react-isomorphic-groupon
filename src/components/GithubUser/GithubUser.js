@@ -1,17 +1,13 @@
 
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-@connect(
-  state => ({user: state.stargazers.data})
-)
+
 export default class GithubUser extends Component {
 
   static propTypes = {
-    user: PropTypes.object.required
+    user: PropTypes.object.isRequired
   };
-
 
   renderUser(user) {
     return (

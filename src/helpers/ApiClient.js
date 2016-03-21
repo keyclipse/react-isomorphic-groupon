@@ -1,5 +1,6 @@
 import superagent from 'superagent';
 import config from '../config';
+import parseLinkHeader from 'parse-link-header';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 const GITHUB_API = 'https://api.github.com';
@@ -52,6 +53,41 @@ class _ApiClient {
     });
   }
 
+  loadRepoStarredByUser(options) {
+    return new Promise((resolve, reject) => {
+      const { page, username } = options;
+      const url = page ? page :
+        `${GITHUB_API}/users/${username}/starred`;
+      const request = superagent;
+      request
+        .get(url)
+        .end((err, { header, body } = {}) => {
+          const pagination = parseLinkHeader(header.link);
+          if (err) {
+            reject(body || err);
+          }else {
+            resolve({
+              repos: body,
+              pagination
+            });
+          }
+        });
+    });
+  }
+
+  loadUserAndRepoWithOption(options) {
+    const promiseUser = this.loadStargazersUser(options.username);
+    const promiseRepos = this.loadRepoStarredByUser(options);
+
+    return new Promise((resolve) => {
+      Promise.all([promiseUser, promiseRepos]).then(([userData, repoData]) => {
+        resolve({
+          userData,
+          repoData
+        });
+      });
+    });
+  }
 
 }
 

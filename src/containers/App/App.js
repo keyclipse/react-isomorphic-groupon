@@ -164,8 +164,9 @@ export default class App extends Component {
           }}
         >
           <AppBar title="AppBar"/>
-          {menuItems.map((item) =>
+          {menuItems.map((item, index) =>
             <MenuItem
+              key={index}
               onTouchTap={this.handleTapMenuItem.bind(this, item.link)}
               primaryText={item.text}
             />)}

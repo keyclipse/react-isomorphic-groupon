@@ -13,3 +13,6 @@ export SurveyForm from './SurveyForm/SurveyForm';
 export WidgetForm from './WidgetForm/WidgetForm';
 export GithubExplorer from './GithubExplorer/GithubExplorer';
 export GithubUser from './GithubUser/GithubUser';
+export GithubUserAndRepo from './GithubUserAndRepo/GithubUserAndRepo';
+export GithubPagination from './GithubPagination/GithubPagination';
+export GithubRepo from './GithubRepo/GithubRepo';

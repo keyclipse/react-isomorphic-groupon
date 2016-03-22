@@ -88,7 +88,6 @@ class _ApiClient {
       });
     });
   }
-
 }
 
 const ApiClient = _ApiClient;

@@ -1,0 +1,17 @@
+.pagination {
+  text-align: center;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li{
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+    .disabled {
+      color: #ddd;
+    }
+  }
+
+}

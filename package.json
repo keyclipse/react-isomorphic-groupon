@@ -115,6 +115,7 @@
     "map-props": "^1.0.0",
     "material-ui": "^0.14.4",
     "multireducer": "^2.0.0",
+    "parse-link-header": "^0.4.1",
     "piping": "^0.3.0",
     "pretty-error": "^1.2.0",
     "react": "^0.14.2",

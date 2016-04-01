@@ -1,7 +1,13 @@
+#!/usr/bin/env bash
+USER="keyclipse"
+REPO="react-isomorprhic-trinity"
+VERSION=$(git describe --tags)
+
+cat << EOF
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "djrut/trinity:v1.2-4-gf71abf9",
+    "Name": "$USER/$REPO:$VERSION",
     "Update": "true"
   },
   "Ports": [
@@ -11,3 +17,4 @@
   ],
   "Logging": "/var/log/"
 }
+EOF

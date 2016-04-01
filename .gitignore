@@ -5,7 +5,6 @@ dist/
 webpack-assets.json
 webpack-stats.json
 npm-debug.log
-Docker/*.tar
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

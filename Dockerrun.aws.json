@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "djrut/trinity:v1.2-4-gf71abf9",
+    "Name": "keyclipse/react-isomorprhic-trinity:v0.9.0-196-g653ee03",
     "Update": "true"
   },
   "Ports": [

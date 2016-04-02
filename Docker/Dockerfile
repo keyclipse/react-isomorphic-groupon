@@ -5,11 +5,12 @@ MAINTAINER Samuel Kitono <samuel@kitono.id>
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+# Install dependencies first so we do not have to this everytime
+COPY package.json /usr/src/app
+RUN npm install
+
 # Bundle the app
 ADD react-isomorprhic-trinity.tar /usr/src/app
-
-# Install dependencies
-RUN npm install
 
 # Expose port and then start the app
 EXPOSE 8080

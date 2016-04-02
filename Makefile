@@ -9,8 +9,9 @@ IMAGE		:= $(USER)/$(REPO):$(VERSION)
 all:	| prep build push commit clean
 
 prep:
-	@echo "+\n++ Building Git archive of HEAD at $(BUILDDIR)/$(REPO).tar...\n+"
+	@echo "+\n++ Building Git archive of HEAD at $(BUILDDIR)/$(REPO).tar and copy package.json ...\n+"
 	@git archive -o $(BUILDDIR)/$(REPO).tar HEAD
+	@cp package.json Docker/package.json
 
 build:
 	@echo "+\n++ Performing build of Docker image $(IMAGE)...\n+"
